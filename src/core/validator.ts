@@ -1,8 +1,10 @@
 import {
   BrainStateSchema,
   BrainConfigSchema,
+  IncomingBrainStateSchema,
   type BrainState,
   type BrainConfig,
+  type IncomingBrainState,
 } from "../types/brain.js";
 import { ZodError } from "zod";
 
@@ -17,6 +19,23 @@ export function validateBrainState(
 ): ValidationResult<BrainState> {
   try {
     const result = BrainStateSchema.parse(data);
+    return { success: true, data: result };
+  } catch (error) {
+    if (error instanceof ZodError) {
+      const errors = error.errors.map(
+        (e) => `${e.path.join(".")}: ${e.message}`,
+      );
+      return { success: false, errors };
+    }
+    return { success: false, errors: ["Unknown validation error"] };
+  }
+}
+
+export function validateIncomingState(
+  data: unknown,
+): ValidationResult<IncomingBrainState> {
+  try {
+    const result = IncomingBrainStateSchema.parse(data);
     return { success: true, data: result };
   } catch (error) {
     if (error instanceof ZodError) {

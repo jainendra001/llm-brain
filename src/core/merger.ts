@@ -32,9 +32,9 @@ function slidingWindow<T>(items: T[], maxSize: number): T[] {
 
 // Deep merge objects
 function deepMerge(
-  existing: Record<string, string>,
-  incoming: Record<string, string>,
-): Record<string, string> {
+  existing: Record<string, unknown>,
+  incoming: Record<string, unknown>,
+): Record<string, unknown> {
   return { ...existing, ...incoming };
 }
 

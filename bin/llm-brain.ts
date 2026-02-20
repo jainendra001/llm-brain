@@ -11,7 +11,7 @@ import { templateCommand } from "../src/commands/template.js";
 program
   .name("llm-brain")
   .description("A portable memory layer for LLM conversations")
-  .version("1.0.1");
+  .version("1.0.2");
 
 // Add all commands
 initCommand(program);

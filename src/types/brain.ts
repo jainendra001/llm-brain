@@ -28,7 +28,37 @@ export const BrainStateSchema = z.object({
   facts: z.object({
     stack: z.array(z.string()),
     architecture: z.string(),
-    environment: z.record(z.string()),
+    environment: z.record(z.unknown()),
+    custom: z.array(z.string()),
+  }),
+
+  decisions: z.array(DecisionSchema),
+
+  activeState: z.object({
+    currentGoal: z.string(),
+    inProgress: z.array(z.string()),
+    blockers: z.array(z.string()),
+    recentlyCompleted: z.array(z.string()),
+  }),
+
+  keyFiles: z.array(KeyFileSchema),
+  knownIssues: z.array(KnownIssueSchema),
+
+  preferences: z.object({
+    style: z.string(),
+    constraints: z.array(z.string()),
+    communication: z.string(),
+  }),
+
+  nextSteps: z.array(z.string()),
+});
+
+// Schema for incoming LLM-generated state (no metadata required)
+export const IncomingBrainStateSchema = z.object({
+  facts: z.object({
+    stack: z.array(z.string()),
+    architecture: z.string(),
+    environment: z.record(z.unknown()),
     custom: z.array(z.string()),
   }),
 
@@ -88,6 +118,7 @@ export type Decision = z.infer<typeof DecisionSchema>;
 export type KeyFile = z.infer<typeof KeyFileSchema>;
 export type KnownIssue = z.infer<typeof KnownIssueSchema>;
 export type BrainState = z.infer<typeof BrainStateSchema>;
+export type IncomingBrainState = z.infer<typeof IncomingBrainStateSchema>;
 export type BrainConfig = z.infer<typeof BrainConfigSchema>;
 export type StateDiff = z.infer<typeof StateDiffSchema>;
 export type SessionRecord = z.infer<typeof SessionRecordSchema>;
@@ -95,14 +126,14 @@ export type SessionRecord = z.infer<typeof SessionRecordSchema>;
 // Default empty brain state
 export function createEmptyBrainState(projectName: string): BrainState {
   return {
-    version: "1.0.0",
+    version: "1.0.2",
     project: projectName,
     lastUpdated: new Date().toISOString(),
     sessionCount: 0,
     facts: {
       stack: [],
       architecture: "",
-      environment: {},
+      environment: {} as Record<string, unknown>,
       custom: [],
     },
     decisions: [],

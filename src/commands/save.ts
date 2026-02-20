@@ -2,7 +2,7 @@ import { Command } from "commander";
 import { saveBrain, loadBrain, loadConfig } from "../core/brain.js";
 import { logger } from "../utils/logger.js";
 import { clipboard } from "../core/clipboard.js";
-import { validateBrainState } from "../core/validator.js";
+import { validateIncomingState } from "../core/validator.js";
 import { readFile } from "fs/promises";
 
 export function saveCommand(program: Command) {
@@ -56,18 +56,18 @@ export function saveCommand(program: Command) {
           throw new Error(`Invalid source: ${source}`);
         }
 
-        // Validate new state
-        const validationResult = validateBrainState(newState);
+        // Validate incoming state (content-only, no metadata required)
+        const validationResult = validateIncomingState(newState);
         if (!validationResult.success) {
           throw new Error(
             `Invalid brain state: ${validationResult.errors?.join(", ")}`,
           );
         }
 
-        // Save/merge the state
+        // Save/merge the state (saveBrain handles metadata auto-fill)
         const { merged, diff } = await saveBrain(
           cwd,
-          newState,
+          validationResult.data!,
           options.replace,
         );
 

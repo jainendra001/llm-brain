@@ -1,6 +1,7 @@
 // Public API — re-export core types and functions for programmatic use
 export type {
   BrainState,
+  IncomingBrainState,
   BrainConfig,
   Decision,
   KeyFile,
@@ -11,6 +12,7 @@ export type {
 
 export {
   BrainStateSchema,
+  IncomingBrainStateSchema,
   BrainConfigSchema,
   createEmptyBrainState,
   createDefaultConfig,
@@ -18,7 +20,7 @@ export {
 
 export { loadBrain, saveBrain, loadConfig, createInitialBrain } from "./core/brain.js";
 export { mergeBrainState } from "./core/merger.js";
-export { validateBrainState, validateBrainConfig } from "./core/validator.js";
+export { validateBrainState, validateIncomingState, validateBrainConfig } from "./core/validator.js";
 export {
   formatBrainForDisplay,
   formatBrainForInjection,

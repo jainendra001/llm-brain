@@ -1,4 +1,4 @@
-import type { BrainState, BrainConfig } from "../types/brain.js";
+import type { BrainState, BrainConfig, IncomingBrainState } from "../types/brain.js";
 import {
   exists,
   ensureDir,
@@ -63,25 +63,27 @@ export async function loadConfig(cwd: string): Promise<BrainConfig> {
 
 export async function saveBrain(
   cwd: string,
-  newState: unknown,
+  incomingContent: IncomingBrainState,
   replace = false,
 ): Promise<{ merged: BrainState; diff: any }> {
   const brainPath = getBrainJsonPath(cwd);
   ensureDir(getBrainDir(cwd));
   ensureDir(getHistoryDir(cwd));
 
-  const validationResult = validateBrainState(newState);
-
-  if (!validationResult.success) {
-    throw new Error(
-      `Invalid brain state: ${validationResult.errors?.join(", ")}`,
-    );
-  }
-
-  const incomingState = validationResult.data!;
   const existingState = replace
-    ? createEmptyBrainState(incomingState.project)
+    ? createEmptyBrainState(
+      getProjectName(cwd) || "unnamed-project",
+    )
     : await loadBrain(cwd);
+
+  // Build a full BrainState by combining existing metadata with incoming content
+  const incomingState: BrainState = {
+    version: existingState.version,
+    project: existingState.project,
+    lastUpdated: new Date().toISOString(),
+    sessionCount: existingState.sessionCount,
+    ...incomingContent,
+  };
 
   // Apply merge algorithm
   const { merged, diff } = mergeBrainState(existingState, incomingState);
