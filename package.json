@@ -1,0 +1,51 @@
+{
+  "name": "llm-brain",
+  "version": "1.0.0",
+  "description": "A portable memory layer for LLM conversations - 'package.json for your thinking'",
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.mts",
+  "bin": {
+    "llm-brain": "dist/bin/llm-brain.mjs"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "lint": "tsc --noEmit",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "llm",
+    "ai",
+    "memory",
+    "context",
+    "cli",
+    "conversation",
+    "brain"
+  ],
+  "author": "Jainendra Tripathy",
+  "homepage": "https://github.com/jainendratripathy/llm-brain#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jainendratripathy/llm-brain.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jainendratripathy/llm-brain/issues"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "clipboardy": "^4.0.0",
+    "commander": "^11.1.0",
+    "zod": "^3.22.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

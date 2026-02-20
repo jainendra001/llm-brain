@@ -1,0 +1,64 @@
+# =============================================================================
+# llm-brain — .npmignore
+# Only the files needed to USE the package are published.
+# Everything below is excluded from the npm tarball.
+# =============================================================================
+
+# ── Source (compiled to dist/) ────────────────────────────────────────────────
+src/
+tsconfig.json
+tsup.config.ts
+
+# ── Dependencies (installed by the consumer) ──────────────────────────────────
+node_modules/
+
+# ── Dev & build tooling ───────────────────────────────────────────────────────
+.github/
+.husky/
+.eslintrc*
+.eslintignore
+.prettierrc*
+.prettierignore
+jest.config.*
+vitest.config.*
+
+# ── Tests & coverage ─────────────────────────────────────────────────────────
+__tests__/
+tests/
+test/
+coverage/
+*.test.ts
+*.spec.ts
+*.test.js
+*.spec.js
+
+# ── Environment & secrets ─────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+
+# ── OS & IDE ──────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# ── Internal planning & design docs ──────────────────────────────────────────
+ARCHITECTURE.md
+BRAINSTORM.md
+COMPARISON.md
+
+# ── Docs folder (internal) ────────────────────────────────────────────────────
+docs/
+
+# ── Misc ─────────────────────────────────────────────────────────────────────
+tmp/
+temp/
+*.tmp
+*.bak
+.npmignore
