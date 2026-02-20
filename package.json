@@ -24,13 +24,13 @@
     "brain"
   ],
   "author": "Jainendra Tripathy",
-  "homepage": "https://github.com/jainendratripathy/llm-brain#readme",
+  "homepage": "https://github.com/jainendra001/llm-brain#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jainendratripathy/llm-brain.git"
+    "url": "https://github.com/jainendra001/llm-brain.git"
   },
   "bugs": {
-    "url": "https://github.com/jainendratripathy/llm-brain/issues"
+    "url": "https://github.com/jainendra001/llm-brain/issues"
   },
   "license": "MIT",
   "devDependencies": {
